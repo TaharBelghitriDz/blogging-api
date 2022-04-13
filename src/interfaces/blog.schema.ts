@@ -1,4 +1,6 @@
-import { Document, Model } from "mongoose";
+import { Document, Model, FilterQuery } from "mongoose";
+
+type Query = FilterQuery<blogInterface>;
 
 export interface blogInterface extends Document {
   ownerId: string;
@@ -11,5 +13,6 @@ export interface blogInterface extends Document {
 
 export interface blogModelInterface extends Model<blogInterface> {
   addBlog: (args: blogInterface) => Promise<blogInterface>;
-  editBlog: (args: blogInterface) => Promise<blogInterface>;
+  editBlog: (Query: Query, args: blogInterface) => Promise<blogInterface>;
+  pushData: (Query: Query, data: object) => Promise<blogInterface>;
 }
