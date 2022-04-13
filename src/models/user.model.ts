@@ -34,14 +34,29 @@ userSchema.pre<userSchemaIntrface>(
   }
 );
 
+type Query = FilterQuery<userSchemaIntrface>;
+
 userSchema.statics.addUser = (args: userSchemaIntrface) =>
   new userDb({ args }).save();
 
 // remove the values you don't want to update from the object before pass it as paramss
 userSchema.statics.updateProfileInfos = (
-  Query: FilterQuery<userSchemaIntrface>,
+  Query: Query,
   args: userSchemaIntrface
-) => userDb.updateOne(Query, { $set: args });
+) => userDb.findOneAndUpdate(Query, { $set: args });
+
+// this to push all data to any array ... one method for all of them
+//push data used to remove data but not in subdocs
+userSchema.statics.pushData = (Query: Query, data: object) =>
+  userDb.findOneAndUpdate(Query, {
+    $push: data,
+  });
+
+// remove data from subdocs
+userSchema.statics.pullData = (Query: Query, data: object) =>
+  userDb.findOneAndUpdate(Query, {
+    $pull: data,
+  });
 
 export const userDb = model<userSchemaIntrface, userModleInterface>(
   "blogUser",
