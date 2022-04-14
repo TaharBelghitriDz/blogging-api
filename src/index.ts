@@ -1,6 +1,7 @@
 import express, { Request } from "express";
 import { graphqlHTTP } from "express-graphql";
 import schema from "./schemas";
+import "./config/db.connection";
 
 var app = express();
 app.use(
