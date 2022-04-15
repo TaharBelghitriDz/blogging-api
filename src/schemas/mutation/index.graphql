@@ -1,0 +1,14 @@
+#import userOutput from "../types/user.graphql"
+
+type Mutation {
+  signUp(
+    name: String
+    email: String
+    password: String
+    checkpassword: String
+  ): userOutput
+}
+
+type Query {
+  signUp: String
+}
