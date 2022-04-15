@@ -12,8 +12,14 @@ export interface userSchemaIntrface extends Document {
   bio?: string;
 }
 
+export interface addUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export interface userModleInterface extends Model<userSchemaIntrface> {
-  addUser: (args: userSchemaIntrface) => Promise<userSchemaIntrface>;
+  addUser: (args: addUser) => Promise<userSchemaIntrface>;
   updateProfileInfos: (
     Query: FilterQuery<userSchemaIntrface>,
     args: userSchemaIntrface
