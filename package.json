@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/TaharBelghitriDz/blogging-api#readme",
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^7.3.9",
+    "@graphql-tools/load": "^7.5.8",
+    "@graphql-tools/schema": "^8.3.8",
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^8.5.8",
     "bcryptjs": "^2.4.3",
@@ -25,6 +28,8 @@
     "express": "^4.17.3",
     "express-graphql": "^0.12.0",
     "graphql": "^16.3.0",
+    "graphql-import": "^1.0.2",
+    "graphql-tools": "^8.2.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.11"
   },
