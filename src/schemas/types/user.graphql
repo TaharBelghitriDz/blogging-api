@@ -1,0 +1,4 @@
+type userOutput {
+  token: String
+  err: String
+}
