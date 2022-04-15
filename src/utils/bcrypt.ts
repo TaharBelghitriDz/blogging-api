@@ -1,4 +1,4 @@
-import { compare, hash } from "bcryptjs";
+import { compare, hash, genSalt } from "bcryptjs";
 
 export const comparePassword = (
   str: string,
@@ -10,5 +10,8 @@ const saltRounds = 8;
 
 export const HashPassword = (
   str: string,
-  clb: (err: Error | undefined, hash: string) => void
-) => hash(str, saltRounds, clb);
+  clb: (err: Error | undefined, hash: string) => void //hash(str, 8, clb);
+) =>
+  genSalt(8, function (err, salt) {
+    return hash("password", salt, clb);
+  });
