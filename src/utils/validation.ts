@@ -9,3 +9,8 @@ export const checkLikes = (like: string): boolean => {
   if (likesTypeValues.includes(like)) return true;
   return false;
 };
+
+export const checkName = (str: string) => {
+  if (str.length > 30 || str.length < 5) return;
+  else return /^[A-Za-z\s]*$/.test(str);
+};
