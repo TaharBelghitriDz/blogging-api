@@ -6,6 +6,10 @@ import { addResolversToSchema } from "@graphql-tools/schema";
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { login, signUp } from "./resolvers/user";
+import dotenv from "dotenv";
+dotenv.config({ path: __dirname + "/.env" });
+
+import { userDb } from "./models/user.model";
 
 // Load schema from the file
 const schema = loadSchemaSync(
@@ -34,6 +38,10 @@ const schemaWithResolvers = addResolversToSchema({
   resolvers,
 });
 
+// userDb.find({ email: "gitnawi0@gmail.com" }, (err) => {
+//   console.log(err);
+// });
+
 const app = express();
 app.use(
   "/",
@@ -42,6 +50,7 @@ app.use(
     graphiql: true,
   })
 );
-app.listen(4000, () => {
-  console.log("server started on port 4000");
+const PORT = process.env.PORT || 5005;
+app.listen(PORT, () => {
+  console.log("server started on port " + PORT);
 });

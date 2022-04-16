@@ -12,5 +12,6 @@ export const checkLikes = (like: string): boolean => {
 
 export const checkName = (str: string) => {
   if (str.length > 30 || str.length < 5) return;
-  else return /^[A-Za-z\s]*$/.test(str);
+  var reg_name = /^[a-zA-Z\s]*$/;
+  return reg_name.test(str);
 };
