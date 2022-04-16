@@ -7,12 +7,19 @@ export interface blogInterface extends Document {
   title: string;
   content: string;
   likes?: number;
+  cover: string;
   comment?: { name: string; content: string; likes: number }[];
   tags?: string[];
 }
 
+export interface addBlogPrms {
+  title: string;
+  content: string;
+  cover: string;
+}
+
 export interface blogModelInterface extends Model<blogInterface> {
-  addBlog: (args: blogInterface) => Promise<blogInterface>;
-  editBlog: (Query: Query, args: blogInterface) => Promise<blogInterface>;
+  addBlog: (args: addBlogPrms) => Promise<blogInterface>;
+  editBlog: (Query: Query, args: addBlogPrms) => Promise<blogInterface>;
   pushData: (Query: Query, data: object) => Promise<blogInterface>;
 }
