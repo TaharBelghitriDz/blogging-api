@@ -30,8 +30,6 @@ userSchema.pre<userSchemaIntrface>(
     HashPassword(this.password, (err, hash) => {
       if (err) throw err;
       this.password = hash;
-      console.log("hash ..." + hash);
-      console.log("hash ..." + this.password);
       next();
     });
   }

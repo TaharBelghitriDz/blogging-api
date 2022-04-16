@@ -30,9 +30,7 @@ export const signUp = (
       if (token) return { token: token };
       else throw { err: "somthing went wrong #2" };
     })
-    .catch((err) => {
-      return { err: err.err || "somthing went wrong" };
-    });
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
 
 export const login = (_: any, args: { email: string; password: string }) => {
@@ -52,7 +50,5 @@ export const login = (_: any, args: { email: string; password: string }) => {
       if (token) return { token: token };
       else throw { err: "somthing went wrong #2" };
     })
-    .catch((err) => {
-      return { err: err.err || "somthing went wrong" };
-    });
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
