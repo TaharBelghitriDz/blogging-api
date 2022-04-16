@@ -2,6 +2,7 @@ import { model, Schema, FilterQuery } from "mongoose";
 import {
   userSchemaIntrface,
   userModleInterface,
+  addUser,
 } from "../interfaces/user.interface";
 import { HashPassword } from "../utils/bcrypt";
 
@@ -18,7 +19,7 @@ const userSchema: Schema<userSchemaIntrface> = new Schema<userSchemaIntrface>({
 });
 
 userSchema.pre<userSchemaIntrface>(
-  "save",
+  "validate",
   function (this: userSchemaIntrface, next) {
     this.rating = 0;
     this.follows = [];
@@ -29,6 +30,8 @@ userSchema.pre<userSchemaIntrface>(
     HashPassword(this.password, (err, hash) => {
       if (err) throw err;
       this.password = hash;
+      console.log("hash ..." + hash);
+      console.log("hash ..." + this.password);
       next();
     });
   }
@@ -36,8 +39,7 @@ userSchema.pre<userSchemaIntrface>(
 
 type Query = FilterQuery<userSchemaIntrface>;
 
-userSchema.statics.addUser = (args: userSchemaIntrface) =>
-  new userDb({ args }).save();
+userSchema.statics.addUser = (args: addUser) => new userDb(args).save();
 
 // remove the values you don't want to update from the object before pass it as paramss
 userSchema.statics.updateProfileInfos = (
