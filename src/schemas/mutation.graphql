@@ -1,0 +1,7 @@
+#import userOutput,signUpInput,addBlog,blogOutput  from "./types.graphql"
+
+type Mutation {
+  signUp(args: signUpInput): userOutput
+  login(email: String, password: String): userOutput
+  addBlog(args: addBlog): blogOutput
+}

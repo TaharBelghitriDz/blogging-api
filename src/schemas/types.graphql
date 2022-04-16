@@ -1,0 +1,22 @@
+input signUpInput {
+  name: String
+  email: String
+  password: String
+  checkpassword: String
+}
+
+type userOutput {
+  token: String
+  err: String
+}
+
+input addBlog {
+  title: String
+  content: String
+  cover: String
+}
+
+type blogOutput {
+  err: String
+  msg: String
+}
