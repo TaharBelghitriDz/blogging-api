@@ -37,6 +37,15 @@ export const editBLog = (
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
 
+export const removeBlog = (args: { userId: string; blogId: string }) =>
+  blogDb
+    .deleteOne({ $and: [{ _id: args.blogId }, { ownerId: args.userId }] })
+    .then((removed) => {
+      if (!removed) throw { err: "somthing wrong happend #5" };
+      return { msg: "removed" };
+    })
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
+
 export const addComments = (_: any, { args }: { args: addComment }) =>
   userDb
     .findOne({ _id: args.id })
@@ -53,5 +62,38 @@ export const addComments = (_: any, { args }: { args: addComment }) =>
     .then((pushed) => {
       if (!pushed) throw { err: "somthing wrong happend #1" };
       return { msg: "posted" };
+    })
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
+
+export const editCommnet = (
+  _: any,
+  { args }: { args: addComment & { commentId: string } }
+) =>
+  blogDb
+    .findOneAndUpdate(
+      {
+        _id: args.blogId,
+        "comment.$._id": args.commentId,
+      },
+      { $set: { "comment.$.content": args.content } }
+    )
+    .then((update) => {
+      if (!update) throw { err: "somrthing wrong happend" };
+      return { msg: "posted" };
+    })
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
+
+export const removeComment = (
+  _: any,
+  args: { blogId: string; userId: string; commentId: string }
+) =>
+  blogDb
+    .pullData(
+      { _id: args.blogId },
+      { comment: { ownerId: args.userId, _id: args.commentId } }
+    )
+    .then((removed) => {
+      if (!removed) throw { err: "somthing wrong happend #5" };
+      return { msg: "removed" };
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
