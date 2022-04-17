@@ -1,5 +1,6 @@
-import { addBlogPrms } from "../interfaces/blog.schema";
+import { addBlogPrms, addComment } from "../interfaces/blog.schema";
 import { blogDb } from "../models/blog.model";
+import { userDb } from "../models/user.model";
 
 export const addBlog = (_: any, { args }: { args: addBlogPrms }) => {
   return blogDb
@@ -18,9 +19,12 @@ export const addBlog = (_: any, { args }: { args: addBlogPrms }) => {
     });
 };
 
-export const editBLog = (_: any, args: addBlogPrms & { id: string }) => {
+export const editBLog = (
+  _: any,
+  { args }: { args: addBlogPrms & { id: string } }
+) => {
   blogDb
-    .findOne({ $or: [{ title: args.title }, { _id: args.id }] })
+    .findOne({ $and: [{ title: args.title }, { _id: args.id }] })
     .then((data) => {
       if (!data) throw { err: "somthing wrong happend" };
       if (data) {
@@ -32,3 +36,22 @@ export const editBLog = (_: any, args: addBlogPrms & { id: string }) => {
     .finally(() => ({ data: "blog added" }))
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
+
+export const addComments = (_: any, { args }: { args: addComment }) =>
+  userDb
+    .findOne({ _id: args.id })
+    .then((user) => {
+      if (!user) throw { err: "unvalid user id" };
+      return user;
+    })
+    .then((user) =>
+      blogDb.pushData(
+        { _id: args.blogId },
+        { comment: { name: user.name, content: args.content, likes: [] } }
+      )
+    )
+    .then((pushed) => {
+      if (!pushed) throw { err: "somthing wrong happend #1" };
+      return { msg: "posted" };
+    })
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
