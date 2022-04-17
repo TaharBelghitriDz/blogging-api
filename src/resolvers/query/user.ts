@@ -2,7 +2,7 @@ import { userDb } from "../../models/user.model";
 
 export const userList = (_: any, args: string[]) => {
   const users = args.map((e) => ({ _id: e }));
-  userDb
+  return userDb
     .find({ $or: users })
     .then((users) => {
       if (!users) throw { err: "no users found" };
