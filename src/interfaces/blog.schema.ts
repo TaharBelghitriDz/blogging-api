@@ -28,4 +28,5 @@ export interface blogModelInterface extends Model<blogInterface> {
   addBlog: (args: addBlogPrms) => Promise<blogInterface>;
   editBlog: (Query: Query, args: addBlogPrms) => Promise<blogInterface>;
   pushData: (Query: Query, data: object) => Promise<blogInterface>;
+  pullData: (Query: Query, data: object) => Promise<blogInterface>;
 }
