@@ -20,3 +20,20 @@ type blogOutput {
   err: String
   msg: String
 }
+
+input addComment {
+  blogId: String
+  content: String
+}
+
+input editComment {
+  blogId: String
+  content: String
+}
+
+input editBlog {
+  title: String
+  content: String
+  cover: String
+  id: String
+}
