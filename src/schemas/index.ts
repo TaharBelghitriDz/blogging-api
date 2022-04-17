@@ -11,6 +11,7 @@ import {
   removeBlog,
   removeComment,
 } from "../resolvers/mutation/blog";
+import { userList } from "../resolvers/query/user";
 
 const schema = loadSchemaSync(
   [join(__dirname, "./mutation.graphql"), join(__dirname, "./query.graphql")],
@@ -31,9 +32,7 @@ const resolvers = {
     removeComment,
   },
   Query: {
-    signUp(h: any, args: any) {
-      return "hi";
-    },
+    userList,
   },
 };
 

@@ -37,3 +37,12 @@ input editBlog {
   cover: String
   id: String
 }
+
+########################################################
+
+type userList {
+  name: String
+  id: String
+  bio: String
+  rating: Int
+}
