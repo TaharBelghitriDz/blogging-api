@@ -1,8 +1,8 @@
-import { addUser } from "../interfaces/user.interface";
-import { userDb } from "../models/user.model";
-import { comparePassword } from "../utils/bcrypt";
-import { tokenSign } from "../utils/token";
-import { checkName, validateEmail } from "../utils/validation";
+import { addUser } from "../../interfaces/user.interface";
+import { userDb } from "../../models/user.model";
+import { comparePassword } from "../../utils/bcrypt";
+import { tokenSign } from "../../utils/token";
+import { checkName, validateEmail } from "../../utils/validation";
 
 export const signUp = (
   _: any,

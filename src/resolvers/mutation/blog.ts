@@ -1,6 +1,6 @@
-import { addBlogPrms, addComment } from "../interfaces/blog.schema";
-import { blogDb } from "../models/blog.model";
-import { userDb } from "../models/user.model";
+import { addBlogPrms, addComment } from "../../interfaces/blog.schema";
+import { blogDb } from "../../models/blog.model";
+import { userDb } from "../../models/user.model";
 
 export const addBlog = (_: any, { args }: { args: addBlogPrms }) => {
   return blogDb

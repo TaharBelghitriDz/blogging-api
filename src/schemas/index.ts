@@ -2,7 +2,7 @@ import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { loadSchemaSync } from "@graphql-tools/load";
 import { addResolversToSchema } from "@graphql-tools/schema";
 import { join } from "path";
-import { login, signUp } from "../resolvers/user";
+import { login, signUp } from "../resolvers/mutation/user";
 import {
   addBlog,
   addComments,
@@ -10,7 +10,7 @@ import {
   editCommnet,
   removeBlog,
   removeComment,
-} from "../resolvers/blog";
+} from "../resolvers/mutation/blog";
 
 const schema = loadSchemaSync(
   [join(__dirname, "./mutation.graphql"), join(__dirname, "./query.graphql")],
