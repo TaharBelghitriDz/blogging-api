@@ -1,6 +1,9 @@
-#import getUsers from "./types.graphql"
+#import getUsers,getBlogs from "./types.graphql"
 
 type Query {
   userList(users: [String]): getUsers
   getUserInfo(args: String): getUsers
+  getBLog(args: String): getBlogs
+  getComments(blogId: String, range: String): getBlogs
+  getListBLog(args: [String]): getBlogs
 }

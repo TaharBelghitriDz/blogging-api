@@ -40,9 +40,37 @@ input editBlog {
 
 ########################################################
 
-type userList {
+type userType {
   name: String
   id: String
   bio: String
   rating: Int
+}
+
+type getUsers {
+  err: String
+  users: [userType]
+  user: userType
+}
+
+type comment {
+  name: String
+  content: String
+  likes: Int
+}
+
+type blogType {
+  title: String
+  ownerId: String
+  content: String
+  cover: String
+  likes: Int
+  comment: [comment]
+  tags: [String]
+}
+
+type getBlogs {
+  err: String
+  blogs: [blogType]
+  blog: blogType
 }
