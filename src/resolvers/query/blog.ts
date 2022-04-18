@@ -5,7 +5,7 @@ export const getBLog = (_: any, args: { blogId: string }) =>
     .findOne({ _id: args.blogId })
     .then((blog) => {
       if (!blog) throw { err: "somthing wrogn happend" };
-      return blog;
+      return { blog };
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 
@@ -14,9 +14,27 @@ export const getListBLog = (_: any, args: { blogId: string[] }) => {
 
   return blogDb
     .findOne({ $or: blogs })
+    .then((blogs) => {
+      if (!blogs) throw { err: "somthing wrogn happend" };
+      return { blogs };
+    })
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
+};
+
+export const getComments = (
+  _: any,
+  { args }: { args: { range: number; blogId: string } }
+) => {
+  blogDb
+    .findOne({
+      _id: args.blogId,
+      comment: {
+        $slice: [args.range, args.range + 10],
+      },
+    })
     .then((blog) => {
       if (!blog) throw { err: "somthing wrogn happend" };
-      return blog;
+      return { blog };
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
