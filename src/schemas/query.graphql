@@ -1,5 +1,6 @@
-#import userList from "./types.graphql"
+#import getUsers from "./types.graphql"
 
 type Query {
-  userList(users: [String]): userList
+  userList(users: [String]): getUsers
+  getUserInfo(args: String): getUsers
 }
