@@ -6,7 +6,7 @@ export const userList = (_: any, args: string[]) => {
     .find({ $or: users })
     .then((users) => {
       if (!users) throw { err: "no users found" };
-      return users;
+      return { users };
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
@@ -16,7 +16,7 @@ export const getUserInfo = (_: any, args: string) => {
     .find({ _id: args })
     .then((users) => {
       if (!users) throw { err: "no user found" };
-      return users;
+      return { users };
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
