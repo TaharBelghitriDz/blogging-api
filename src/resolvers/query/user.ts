@@ -10,3 +10,13 @@ export const userList = (_: any, args: string[]) => {
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
+
+export const getUserInfo = (_: any, args: string) => {
+  return userDb
+    .find({ _id: id })
+    .then((users) => {
+      if (!users) throw { err: "no user found" };
+      return users;
+    })
+    .catch((err) => ({ err: err.err || "somthing went wrong" }));
+};
