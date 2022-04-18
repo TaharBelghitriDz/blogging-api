@@ -13,7 +13,7 @@ export const userList = (_: any, args: string[]) => {
 
 export const getUserInfo = (_: any, args: string) => {
   return userDb
-    .find({ _id: id })
+    .find({ _id: args })
     .then((users) => {
       if (!users) throw { err: "no user found" };
       return users;
