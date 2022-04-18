@@ -1,16 +1,16 @@
 import { blogDb } from "../../models/blog.model";
 
-export const getBLog = (_: any, args: { blogId: string }) =>
+export const getBLog = (_: any, args: string) =>
   blogDb
-    .findOne({ _id: args.blogId })
+    .findOne({ _id: args })
     .then((blog) => {
       if (!blog) throw { err: "somthing wrogn happend" };
       return { blog };
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 
-export const getListBLog = (_: any, args: { blogId: string[] }) => {
-  const blogs = args.blogId.map((e) => ({ _id: e }));
+export const getListBLog = (_: any, args: string[]) => {
+  const blogs = args.map((e) => ({ _id: e }));
 
   return blogDb
     .findOne({ $or: blogs })
@@ -23,7 +23,7 @@ export const getListBLog = (_: any, args: { blogId: string[] }) => {
 
 export const getComments = (
   _: any,
-  { args }: { args: { range: number; blogId: string } }
+  args: { range: number; blogId: string }
 ) => {
   blogDb
     .findOne({
