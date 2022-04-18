@@ -14,9 +14,9 @@ export const userList = (_: any, args: string[]) => {
 export const getUserInfo = (_: any, args: string) => {
   return userDb
     .find({ _id: args })
-    .then((users) => {
-      if (!users) throw { err: "no user found" };
-      return { users };
+    .then((user) => {
+      if (!user) throw { err: "no user found" };
+      return { user };
     })
     .catch((err) => ({ err: err.err || "somthing went wrong" }));
 };
